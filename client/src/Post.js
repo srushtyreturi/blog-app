@@ -1,23 +1,31 @@
-export default function Post() {
+import { format } from "date-fns";
+import { Link } from "react-router-dom";
+
+export default function Post({
+  _id,
+  title,
+  summary,
+  cover,
+  content,
+  createdAt,
+  author,
+}) {
   return (
     <div className="post">
       <div className="image">
-        <img
-          src="https://techcrunch.com/wp-content/uploads/2024/01/GettyImages-1256204431.jpg?w=1390&crop=1"
-          alt=""
-        />
+        <Link to={`/post/${_id}`}>
+          <img src={"http://localhost:4000/" + cover} alt="" />
+        </Link>
       </div>
       <div className="texts">
-        <h2>The two faces of AI</h2>
+        <Link to={`/post/${_id}`}>
+          <h2>{title}</h2>
+        </Link>
         <p className="info">
-          <span className="author">Srushty R</span>
-          <time>2024-01-21 16:47</time>
+          <span className="author">{author.username}</span>
+          <time>{format(new Date(createdAt), "MMM d, yyyy HH:mm")}</time>
         </p>
-        <p className="summary">
-          We all make mistakes. But sometimes we forget that technology does,
-          too — especially when it comes to AI, which is still in its early days
-          in many respects. — Anna
-        </p>
+        <p className="summary">{summary}</p>
       </div>
     </div>
   );
